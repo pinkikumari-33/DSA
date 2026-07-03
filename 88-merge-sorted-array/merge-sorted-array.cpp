@@ -6,18 +6,15 @@ public:
         vector<int> output(m+n,0);
 
         while(i < m && j < n){
-            if(nums1[i] < nums2[j]){
+            if(nums1[i] <= nums2[j]){
                 output[k] = nums1[i];
                 i++;
             }
-            else if(nums2[j] < nums1[i]){
+            else if(nums2[j] <= nums1[i]){
                 output[k] = nums2[j];
                 j++;
             }
-            else{
-                output[k] = nums1[i];
-                i++;
-            }
+           
             k++;
         }
 
