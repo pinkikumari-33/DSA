@@ -3,11 +3,8 @@ public:
     vector<vector<int>> generateMatrix(int n) {
         vector<vector<int>> matrix(n,vector<int>(n));
 
-        int row = matrix.size();
-        int col = matrix[0].size();
-
-        int srow = 0, erow = row -1;
-        int scol = 0, ecol = col -1;
+        int srow = 0, erow = n -1;
+        int scol = 0, ecol = n -1;
 
         int val = 1;
 
