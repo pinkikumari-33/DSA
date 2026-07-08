@@ -1,16 +1,15 @@
 class Solution {
 public:
-    void noAjacentZeroes(int n,int i,string ans,vector<string> &res){
+    void generateString(int n,int i,string ans,vector<string> &result){
         if(i == n){
-            res.push_back({ans});
+            result.push_back(ans);
             return;
         }
 
-        // Always add one
-        noAjacentZeroes(n,i+1,ans + "1",res);
+        generateString(n,i+1,ans+"1",result);
 
         if(ans.empty() || ans.back() != '0'){
-            noAjacentZeroes(n,i+1,ans + "0",res);
+            generateString(n,i+1,ans+"0",result);
         }
     }
 
@@ -18,7 +17,8 @@ public:
         vector<string> res;
         string ans = "";
 
-        noAjacentZeroes(n,0,ans,res);
+        generateString(n,0,ans,res);
+
         return res;
     }
 };
