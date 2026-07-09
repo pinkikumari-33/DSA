@@ -3,6 +3,11 @@ public:
     void allCombination(vector<int> &candidates,int i,int target,vector<int> &ans,vector<vector<int>> &res){
         if(target < 0) return;
 
+        if(target == 0){
+            res.push_back(ans);
+            return;
+        }
+
         if(i == candidates.size()){
             if(target == 0){
                 res.push_back(ans);
@@ -22,7 +27,6 @@ public:
 
     vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
         vector<int> ans;
-        set<vector<int>> s;
         vector<vector<int>> res;
 
         sort(candidates.begin(),candidates.end());
