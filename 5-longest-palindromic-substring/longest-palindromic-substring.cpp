@@ -1,8 +1,5 @@
 class Solution {
 public:
-    bool isSame(char a, char b){
-        return a == b;
-    }
 
     bool isPalindrome(string &s,int i,int j){
         while(i <= j){
