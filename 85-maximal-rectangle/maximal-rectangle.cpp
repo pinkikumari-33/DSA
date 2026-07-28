@@ -57,30 +57,22 @@ public:
         int row = matrix.size();
         int col = matrix[0].size();
 
-        vector<vector<int>> mat(row,vector<int> (col));
-
-        for(int i = 0; i < row; i++){
-            for(int j = 0; j < col; j++){
-                mat[i][j] = matrix[i][j] - '0';
-            }
-        }
-
-        for(int j = 0; j < col; j++){
-            for(int i = 1; i < row; i++){
-
-                if(mat[i][j] == 0) continue;
-
-                mat[i][j] += mat[i-1][j];
-            }
-        }
-
+        vector<int> his(col,0);
         int area = 0;
 
         for(int i = 0; i < row; i++){
-            int currArea = maxArea(mat[i]);
-            area = max(area,currArea);
-        }
+            for(int j = 0; j < col; j++){
+                if(matrix[i][j] == '1'){
+                    his[j]++;
+                }
+                else{
+                    his[j] = 0;
+                }
+            }
 
+            area = max(area,maxArea(his));
+        }
+        
         return area;
     }
 };
