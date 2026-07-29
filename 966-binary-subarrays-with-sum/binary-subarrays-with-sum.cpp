@@ -1,25 +1,36 @@
 class Solution {
 public:
-    int numSubarraysWithSum(vector<int>& nums, int goal) {
-        int count = 0;
-        unordered_map<int,int> mp;
-        mp[0] = 1;
+    int numSubaarayWithSumLessThanK(vector<int> &nums,int goal){
+        if(goal < 0) return 0;
+        
+        int n = nums.size();
+
+        int right = 0;
+        int left = 0;
 
         int sum = 0;
+        int count = 0;
 
-        for(int i = 0; i < nums.size(); i++){
-            sum += nums[i];
-            //if(sum == goal) count++;
+        while(right < n){
+            sum += nums[right];
 
-            int rem = sum - goal;
-
-            if(mp.find(rem) != mp.end()){
-                count += mp[rem];
+            while(left < n && sum > goal){
+                sum -= nums[left];
+                left++;
             }
 
-            mp[sum]++;
+            // add length of the array as the length form the valid answer
+            if(sum <= goal) count += right - left + 1;
+            right++;
         }
 
         return count;
+    }
+
+    int numSubarraysWithSum(vector<int>& nums, int goal) {
+        int count1 = numSubaarayWithSumLessThanK(nums,goal);
+        int count2 = numSubaarayWithSumLessThanK(nums,goal-1);
+
+        return abs(count1-count2);
     }
 };
