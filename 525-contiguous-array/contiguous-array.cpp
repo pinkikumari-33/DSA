@@ -5,20 +5,20 @@ public:
         int n = nums.size();
 
         int len = 0;
-        int pSum = 0;
+        int pref = 0;
         mp[0] = -1;
-
+        
         for(int i = 0; i < n; i++) {
-            if(nums[i] == 0) pSum -= 1;
-            else pSum += 1;
 
-            if(mp.find(pSum) != mp.end()) {
-                len = max(len, i - mp[pSum]);
+            if(nums[i] == 0) pref -= 1;
+            else pref += 1;
+
+            if(mp.find(pref) != mp.end()) {
+                len = max(len,i-mp[pref]);
             }
             else {
-                mp[pSum] = i;
+                mp[pref] = i;
             }
-            
         }
 
         return len;
