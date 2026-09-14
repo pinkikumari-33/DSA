@@ -1,20 +1,25 @@
 class Solution {
 public:
     void sortColors(vector<int>& nums) {
-        //sol
-        map<int,int> mp;
+        vector<int> colors(3,0);
+        int n = nums.size();
 
-        for(int i = 0; i < nums.size();i++){
-            mp[nums[i]]++;
+        for(int i = 0; i < n; i++) {
+            colors[nums[i]]++;
         }
 
-        int i = 0;
-
-        for(auto it : mp){
-            while(it.second > 0){
-                nums[i] = it.first;
-                it.second--;
-                i++;
+        for(int i = 0; i < n; i++) {
+            if(colors[0] > 0) {
+                nums[i] = 0;
+                colors[0]--;
+            }
+            else if(colors[1] > 0) {
+                nums[i] = 1;
+                colors[1]--;
+            }
+            else {
+                nums[i] = 2;
+                colors[2]--;
             }
         }
     }
