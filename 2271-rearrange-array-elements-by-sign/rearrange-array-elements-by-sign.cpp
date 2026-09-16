@@ -1,26 +1,34 @@
 class Solution {
 public:
     vector<int> rearrangeArray(vector<int>& nums) {
-        int p = 0;
-        int n = 1;
-        int i = 0;
+        int n = nums.size();
 
-        int sizea = nums.size();
-        vector<int>output(sizea,0);
+        vector<int> nArray;
+        vector<int> pArray;
 
-        for(int i = 0; i < sizea ; i++){
-            if(nums[i] > 0){
-                output[p] = nums[i];
-                p = p + 2;
+        for(int i = 0; i < n; i++) {
+            if(nums[i] < 0) {
+                nArray.push_back(nums[i]);
             }
-            else{
-                output[n] = nums[i];
-                n = n + 2;
+            else {
+                pArray.push_back(nums[i]);
             }
         }
 
+        int n1 = 0;
+        int p = 0;
 
-        return output;
-        
+        for(int i = 0; i < n; i++) {
+            if(i % 2 == 0) {
+                nums[i] = pArray[p];
+                p++;
+            }
+            else {
+                nums[i] = nArray[n1];
+                n1++;
+            }
+        }
+
+        return nums;
     }
 };
