@@ -10,11 +10,11 @@ public:
 
     void nextPermutation(vector<int>& nums) {
         int n = nums.size();
-        int pivot  = -1;
+        int pivot = -1;
+        int rightMost = 0;
 
         for(int i = n-2; i >= 0; i--) {
-            if(nums[i] <
-             nums[i+1]) {
+            if(nums[i] < nums[i+1]) {
                 pivot = i;
                 break;
             }
@@ -27,11 +27,12 @@ public:
 
         for(int i = n-1; i >= 0; i--) {
             if(nums[i] > nums[pivot]) {
-                swap(nums[i],nums[pivot]);
+                rightMost = i;
                 break;
             }
         }
 
+        swap(nums[rightMost],nums[pivot]);
         reverse(nums,pivot+1,n-1);
 
     }
