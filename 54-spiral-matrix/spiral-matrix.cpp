@@ -4,35 +4,43 @@ public:
         int row = matrix.size();
         int col = matrix[0].size();
 
-        int srow = 0; int erow = row - 1;
-        int scol = 0; int ecol = col - 1;
+        int rstart = 0, cstart = 0, rend = row-1, cend = col-1;
 
         vector<int> ans;
 
-        while(srow <= erow && scol <= ecol ){
-            // Top Boundary
-            for(int i = scol; i <= ecol; i++) ans.push_back(matrix[srow][i]);
+        while(rstart <= rend && cstart <= cend) {
+            // Top boundary
+            for(int i = cstart; i < cend; i++) {
+                ans.push_back(matrix[rstart][i]);
+            }
 
             // Right Boundary
-            for(int i = srow+1; i <= erow; i++) ans.push_back(matrix[i][ecol]);
+            for(int i = rstart; i <= rend; i++) {
+                ans.push_back(matrix[i][cend]);
+            }
 
-            //Bottom Boundary
-            for(int i = ecol-1; i >= scol; i--){
-                if(srow == erow)  break;
-                ans.push_back(matrix[erow][i]);
-            } 
+            // Bottom Boundary
+            for(int i = cend-1; i >= cstart; i--) {
+                
+                if(rstart == rend) {
+                    break;
+                }
+                ans.push_back(matrix[rend][i]);
+            }
 
-            //Left Boundary
-            for(int i = erow-1; i >= srow+1; i--){
-                if(ecol == scol ) break;
-                ans.push_back(matrix[i][scol]);
-            } 
+            // Left Bounary
+            for(int i = rend-1; i >= rstart+1; i--) {
+                
+                if(cstart == cend) {
+                    break;
+                }
+                ans.push_back(matrix[i][cstart]);
+            }
 
-            srow++;scol++;
-            erow--;ecol--;
-        
+            cstart++; cend--;
+            rstart++; rend--;
         }
-        
+
         return ans;
     }
 };
