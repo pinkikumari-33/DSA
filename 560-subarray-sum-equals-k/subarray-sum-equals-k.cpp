@@ -1,35 +1,26 @@
 class Solution {
 public:
     int subarraySum(vector<int>& nums, int k) {
-        int count = 0;
-
-        // Brute Froce
-
-        // for(int i = 0; i < nums.size();i++){
-        //     int sum = 0;
-        //     for(int j = i; j < nums.size(); j++){
-        //         sum += nums[j];
-        //         if(sum == k) count++;
-        //     }
-        // }
-        
-        // Optimised Solution
         int n = nums.size();
-        int cum = 0;
 
-        unordered_map<int,int> mp;
+        int currSum = 0;
+        int count = 0;
+        int left = 0;
 
-        for(int i = 0; i < n; i++){
-            cum += nums[i];
-            if(cum == k) count++;
+        unordered_map<int,int> needed;
+        needed[0] = 1;
 
-            int rem = cum - k;
+        while(left < n) {
+            currSum += nums[left];
 
-            if(mp.find(rem) != mp.end()){
-                count += mp[rem];
+            int rem = currSum - k;
+
+            if(needed.find(rem) != needed.end()) {
+                count += needed[rem];
             }
-
-            mp[cum]++;
+            
+            needed[currSum]++;
+            left++;
         }
 
         return count;
