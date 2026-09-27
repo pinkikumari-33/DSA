@@ -11,26 +11,44 @@
 class Solution {
 public:
     ListNode* swapPairs(ListNode* head) {
-        ListNode* curr = head;
-        ListNode* prev = nullptr;
-        ListNode* next = nullptr;
-        ListNode* temp = nullptr;
+        //-------------- Bettter Approach using three pointer -------
 
-        while(curr != nullptr && curr->next != nullptr) {
-            next = curr->next;
+        // Object of listNode class
+        ListNode* dummy = new ListNode();
+        dummy->next = head;
 
-            temp = next->next;
+        ListNode* prev = dummy;
+        ListNode* first = head;
 
-            next->next = curr;
-            curr->next = temp;
-            if(prev) prev->next = next;
-            else head = next;
+        while(first != nullptr && first->next != nullptr) {
+            ListNode* second = first->next;
 
-            prev = curr;
-            curr = curr->next;
+            first->next = second->next;
+            second->next = first;
+
+            prev->next = second;
+            prev = first;
+            first = prev->next;
+
         }
 
-        return head;
+        // ------- My Approach using four pointer ------------
+
+        // while(curr != nullptr && curr->next != nullptr) {
+        //     next = curr->next;
+
+        //     temp = next->next;
+
+        //     next->next = curr;
+        //     curr->next = temp;
+        //     if(prev) prev->next = next;
+        //     else head = next;
+
+        //     prev = curr;
+        //     curr = curr->next;
+        // }
+
+        return dummy->next;
 
     }
 };
