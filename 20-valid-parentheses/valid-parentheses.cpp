@@ -1,20 +1,20 @@
 class Solution {
 public:
     bool isValid(string s) {
-        if(s.size()%2 == 1) return false;
+        int n = s.size();
+
+        if(n == 1 || n == 0) return 0;
+
         stack<char> st;
 
-        for(int i =0; i < s.size(); i++){
-            if(s[i] == '(' || s[i] == '[' || s[i] == '{') st.push(s[i]);
-            else if(st.empty()) return false;
-            else if((s[i] == ')' && st.top() != '(')) return false;
-            else if(s[i] == ']' && st.top() != '[') return false;
-            else if(s[i] == '}' && st.top() != '{') return false;
-
-            else st.pop();
+        for(int i = 0; i < n; i++) {
+            if(s[i] == '(' || s[i] == '[' || s[i] == '{' ) st.push(s[i]);
+            else if(s[i] == ')' && !st.empty() && st.top() == '(') st.pop();
+            else if(s[i] == ']' && !st.empty() && st.top() == '[') st.pop();
+            else if(s[i] == '}' && !st.empty() && st.top() == '{') st.pop();
+            else return false;
         }
 
-        if(st.empty() == true) return true;
-        return false;
+        return st.empty();
     }
 };
