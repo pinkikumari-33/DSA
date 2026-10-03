@@ -1,6 +1,8 @@
 class Solution {
 public:
     int romanToInt(string s) {
+        int n = s.size();
+
         unordered_map<char,int> roman = {
             {'I',1},
             {'V',5},
@@ -11,18 +13,18 @@ public:
             {'M',1000}
         };
 
-        int n = s.length();
         int value = 0;
 
-        for(int i = 0; i < n -1; i++){
-            if(roman[s[i]] < roman[s[i+1]]){
+        for(int i = 0; i < n-1; i++) {
+            if(roman[s[i]] < roman[s[i+1]]) {
                 value -= roman[s[i]];
             }
-            else{
+            else {
                 value += roman[s[i]];
             }
         }
 
-        return value+roman[s[n-1]];
+        return value + roman[s[n-1]];
+
     }
 };
